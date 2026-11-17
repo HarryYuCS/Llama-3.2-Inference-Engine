@@ -2,6 +2,17 @@
 
 Solo CUDA/C++ decode runtime for **Llama-3.2-1B-Instruct**.
 
+## `.safetensors` Naming Scheme
+
+```
+model.embed_tokens.weight
+model.layers.{i}.input_layernorm.weight
+model.layers.{i}.self_attn.{q,k,v,o}_proj.weight
+model.layers.{i}.post_attention_layernorm.weight
+model.layers.{i}.mlp.{gate,up,down}_proj.weight
+model.norm.weight
+```
+
 ## Model architecture (Llama-3.2-1B)
 
 Dimensions from `weights/config.json`: `vocab=128256`, `d_model=2048`, `n_layers=16`, `n_heads=32`, `n_kv_heads=8`, `head_dim=64`, `intermediate=8192`. Embeddings and `lm_head` are tied.

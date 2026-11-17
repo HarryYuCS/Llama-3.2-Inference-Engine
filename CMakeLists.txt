@@ -16,6 +16,7 @@ find_package(CUDAToolkit REQUIRED)
 add_library(LlamaEngineLib STATIC
     # model
     ${PROJECT_SOURCE_DIR}/runtime/src/model/model_config.cpp
+    ${PROJECT_SOURCE_DIR}/runtime/src/model/weight_store.cpp
     # engine
 )
 target_include_directories(LlamaEngineLib

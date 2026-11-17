@@ -4,6 +4,9 @@ ModelConfig object is from parsed model.config in huggingface model repo,
 
 */
 
+#ifndef MODEL_CONFIG_HPP
+#define MODEL_CONFIG_HPP
+
 #include <string>
 #include <fstream>
 #include <nlohmann/json.hpp>
@@ -34,3 +37,5 @@ struct ModelConfig {
 };
 
 } // namespace model
+
+#endif // MODEL_CONFIG_HPP

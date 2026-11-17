@@ -1,0 +1,8 @@
+weights/
+
+venv/
+__pycache__/
+
+build/
+
+.vscode/

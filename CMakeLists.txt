@@ -14,6 +14,8 @@ find_package(CUDAToolkit REQUIRED)
 
 # build engine, model as a single library for tests
 add_library(LlamaEngineLib STATIC
+    # core
+    ${PROJECT_SOURCE_DIR}/runtime/src/core/tensor.cpp
     # model
     ${PROJECT_SOURCE_DIR}/runtime/src/model/model_config.cpp
     ${PROJECT_SOURCE_DIR}/runtime/src/model/weight_store.cpp

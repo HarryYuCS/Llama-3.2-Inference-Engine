@@ -15,6 +15,7 @@ Tensor abstraction wrapping a pointer to device
 
 namespace core {
 
+// for completeness of tensor class, even though weights are only BF16
 enum class DType {
     BF16,
     F16,
@@ -24,7 +25,7 @@ enum class DType {
 class DeviceTensor {
 public:
     DeviceTensor(
-        void* hostPtr,
+        const void* hostPtr,
         const std::vector<size_t> &shape,
         const std::string &name,
         DType dtype
@@ -35,7 +36,7 @@ public:
 
     // moves to be implemented
     DeviceTensor(DeviceTensor&& other) noexcept;
-    DeviceTensor& operator=(const DeviceTensor&&) noexcept;
+    DeviceTensor& operator=(DeviceTensor&&) noexcept;
 
     const void *getDevicePtr();
     const std::vector<size_t> &getShape();

@@ -1,5 +1,7 @@
 #include <model/model_config.hpp>
 
+#include <nlohmann/json.hpp>
+
 #include <stdexcept>
 
 namespace model {

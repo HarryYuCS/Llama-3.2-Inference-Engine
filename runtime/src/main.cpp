@@ -1,4 +1,5 @@
 #include <model/model_config.hpp>
+#include <model/weight_store.hpp>
 
 #include <string>
 #include <stdexcept>
@@ -8,11 +9,12 @@
 #include <string_view>
 #include <filesystem>
 
-// cli config
+// cli config object
 struct LaunchConfig {
-    std::string weightsFile; // root of huggingface repo
+    std::string weightsPath; // root of huggingface repo
 };
 
+// parses cli args and returns LaunchConfig object
 std::optional<LaunchConfig> parse_args(int argc, char** argv) {
     LaunchConfig cfg;
 
@@ -28,13 +30,15 @@ std::optional<LaunchConfig> parse_args(int argc, char** argv) {
                 return std::nullopt;
             }
             else {
-                cfg.weightsFile = std::filesystem::current_path().string() + "/" + args[i + 1];
+                std::string cwd = std::filesystem::current_path().string();
+
+                cfg.weightsPath = cwd + "/" + args[i + 1];
                 // std::cout << cfg.weightsFile << std::endl;
             }
         }
     }
 
-    if (cfg.weightsFile.empty()) {
+    if (cfg.weightsPath.empty()) {
         return std::nullopt;
     }
     return cfg;
@@ -44,10 +48,14 @@ int main(int argc, char** argv) {
     (void)argc;
     (void)argv;
     
-    std::optional<LaunchConfig> config = parse_args(argc, argv);
-    if (!config) {
+    std::optional<LaunchConfig> launchConfigOptional = parse_args(argc, argv);
+    if (!launchConfigOptional) {
         std::cerr << "--weights-dir is required." << std::endl;
     }
+
+    LaunchConfig launchConfig = launchConfigOptional.value();
+    model::ModelConfig modelConfig = model::ModelConfig(launchConfig.weightsPath + "/config.json");
+    model::WeightStore weightStore = model::WeightStore(modelConfig, launchConfig.weightsPath + "/model.safetensors");
 
     return 0;
 }

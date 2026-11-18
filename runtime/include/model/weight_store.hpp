@@ -28,13 +28,18 @@ namespace model {
 
 class WeightStore {
 public:
-    WeightStore(const ModelConfig &); // parse and load tensors
+    WeightStore(const ModelConfig &, const std::string &safetensorsPath); // parse and load tensors
 
     const core::DeviceTensor& get(const std::string &name) const;
+
+    WeightStore(const WeightStore &) = delete;
+    WeightStore &operator=(const WeightStore &) = delete;
+    WeightStore(WeightStore &&) noexcept = delete;
+    WeightStore &operator=(WeightStore &&) noexcept = delete;
+
 private:
     std::unordered_map<std::string, core::DeviceTensor> tensors_;
 
-    void parseSafetensors_(const std::string &path); // parse .safetensors file at path
 };
 
 } // namespace model

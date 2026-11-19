@@ -70,6 +70,10 @@ DeviceTensor& DeviceTensor::operator=(DeviceTensor&& other) noexcept {
 const void *DeviceTensor::getDevicePtr() const {
     return devicePtr_;
 }
+void *DeviceTensor::getDevicePtr() {
+    return devicePtr_;
+}
+
 const std::vector<size_t> &DeviceTensor::getShape() const {
     return shape_;
 }

@@ -39,6 +39,8 @@ public:
     DeviceTensor& operator=(DeviceTensor&&) noexcept;
 
     const void *getDevicePtr() const;
+    void *getDevicePtr(); // non const overload
+
     const std::vector<size_t> &getShape() const;
     const std::string &getName() const;
     DType getDtype() const;

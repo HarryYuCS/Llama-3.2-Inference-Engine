@@ -1,5 +1,0 @@
-/**
-
-wrapper for cuBLAS GEMM
-
-*/

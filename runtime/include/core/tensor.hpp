@@ -38,10 +38,10 @@ public:
     DeviceTensor(DeviceTensor&& other) noexcept;
     DeviceTensor& operator=(DeviceTensor&&) noexcept;
 
-    const void *getDevicePtr();
-    const std::vector<size_t> &getShape();
-    const std::string &getName();
-    DType getDtype();
+    const void *getDevicePtr() const;
+    const std::vector<size_t> &getShape() const;
+    const std::string &getName() const;
+    DType getDtype() const;
 
     ~DeviceTensor(); // free the device ptr
 private:

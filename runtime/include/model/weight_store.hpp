@@ -22,13 +22,15 @@ model.layers.{i}.self_attn.{q,k,v,o}_proj.weight
 model.layers.{i}.post_attention_layernorm.weight
 model.layers.{i}.mlp.{gate,up,down}_proj.weight
 model.norm.weight
+
+stored  [out, in]
 */
 
 namespace model {
 
 class WeightStore {
 public:
-    WeightStore(const ModelConfig &, const std::string &safetensorsPath); // parse and load tensors
+    WeightStore(const std::string &safetensorsPath); // parse and load tensors
 
     const core::DeviceTensor& get(const std::string &name) const;
 

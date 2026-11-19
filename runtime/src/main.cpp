@@ -55,7 +55,7 @@ int main(int argc, char** argv) {
 
     LaunchConfig launchConfig = launchConfigOptional.value();
     model::ModelConfig modelConfig = model::ModelConfig(launchConfig.weightsPath + "/config.json");
-    model::WeightStore weightStore = model::WeightStore(modelConfig, launchConfig.weightsPath + "/model.safetensors");
+    model::WeightStore weightStore = model::WeightStore(launchConfig.weightsPath + "/model.safetensors");
 
     return 0;
 }

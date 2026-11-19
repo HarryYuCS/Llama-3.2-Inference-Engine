@@ -67,16 +67,16 @@ DeviceTensor& DeviceTensor::operator=(DeviceTensor&& other) noexcept {
     return *this;
 }
 
-const void *DeviceTensor::getDevicePtr() {
+const void *DeviceTensor::getDevicePtr() const {
     return devicePtr_;
 }
-const std::vector<size_t> &DeviceTensor::getShape() {
+const std::vector<size_t> &DeviceTensor::getShape() const {
     return shape_;
 }
-const std::string &DeviceTensor::getName() {
+const std::string &DeviceTensor::getName() const {
     return name_;
 }
-DType DeviceTensor::getDtype() {
+DType DeviceTensor::getDtype() const {
     return dtype_;
 }
 

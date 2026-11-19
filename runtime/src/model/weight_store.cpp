@@ -48,7 +48,7 @@ core::DType strToDtype(const std::string &s) {
 
 } // anonymous namespace
 
-WeightStore::WeightStore(const ModelConfig &cfg, const std::string &safetensorsPath) {
+WeightStore::WeightStore(const std::string &safetensorsPath) {
     int fd = open(safetensorsPath.data(), O_RDONLY);
     struct stat st{};
     fstat(fd, &st);
@@ -78,7 +78,7 @@ WeightStore::WeightStore(const ModelConfig &cfg, const std::string &safetensorsP
         std::vector<size_t> offsets = data.at("data_offsets").get<std::vector<size_t>>();
         size_t start = offsets[0], end = offsets[1]; // offsets is a pair of start, end
 
-        const void* hostPtr = fileBegin + start;
+        const void* hostPtr = tensorBegin + start;
         size_t tensorNumBytes = end - start;
 
         std::cout << "[DEBUG] Tensor " << name << ", dtype " << dtype << " at offset " << start << std::endl;

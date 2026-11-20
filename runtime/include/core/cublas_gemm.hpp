@@ -19,15 +19,28 @@ public:
     // initialize cublas handle
     CublasGemmExecutor();
 
-    // matches tensor dtypes, then writes to an output tensor
-    void gemm(
-        const core::DeviceTensor &A,
-        const core::DeviceTensor &B,
-        DeviceTensor &C,
-        bool transposeB = true
+    // no copy or move operations
+    CublasGemmExecutor(const CublasGemmExecutor &) = delete;
+    CublasGemmExecutor &operator=(const CublasGemmExecutor &) = delete;
+    CublasGemmExecutor(CublasGemmExecutor &&) noexcept = delete;
+    CublasGemmExecutor &operator=(CublasGemmExecutor &&) noexcept = delete;
+
+    ~CublasGemmExecutor();
+
+    /**
+    * @brief Computes row-major memory layout gemm with weights (B) as [output, input] and writes row-major to C
+    *   
+    * @param A : tensor with row major memory layout
+    * @param B : tensor with row major memory layout
+    */
+    void linear(
+        const core::DeviceTensor &X,
+        const core::DeviceTensor &W,
+        DeviceTensor &Y
     );
+
 private:
-    cublasHandle_t handle;
+    cublasHandle_t handle = nullptr;
 };
 
 } // namespace core

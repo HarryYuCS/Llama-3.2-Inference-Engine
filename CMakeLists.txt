@@ -17,6 +17,7 @@ find_package(Catch2 3 REQUIRED)
 add_library(llama_engine_lib STATIC
     # core
     ${PROJECT_SOURCE_DIR}/runtime/src/core/tensor.cpp
+    ${PROJECT_SOURCE_DIR}/runtime/src/core/cublas_gemm.cpp
     # model
     ${PROJECT_SOURCE_DIR}/runtime/src/model/model_config.cpp
     ${PROJECT_SOURCE_DIR}/runtime/src/model/weight_store.cpp
@@ -45,6 +46,8 @@ target_link_libraries(llama_engine
 # build tests
 enable_testing()
 add_executable(llama_engine_tests
+    # core
+    ${PROJECT_SOURCE_DIR}/runtime/tests/core/test_cublas_gemm.cpp
     # model
     ${PROJECT_SOURCE_DIR}/runtime/tests/model/test_weight_store.cpp
     ${PROJECT_SOURCE_DIR}/runtime/tests/model/test_model_config.cpp

@@ -47,6 +47,7 @@ target_link_libraries(llama_engine
 enable_testing()
 add_executable(llama_engine_tests
     # core
+    ${PROJECT_SOURCE_DIR}/runtime/tests/core/test_tensor.cpp
     ${PROJECT_SOURCE_DIR}/runtime/tests/core/test_cublas_gemm.cpp
     # model
     ${PROJECT_SOURCE_DIR}/runtime/tests/model/test_weight_store.cpp

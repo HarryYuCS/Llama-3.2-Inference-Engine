@@ -31,6 +31,18 @@ public:
         DType dtype
     ); // constructs tensor using data from host, makes a device copy and owns it
 
+    // torch-like factories
+    static DeviceTensor empty(
+        const std::vector<size_t> &shape,
+        const std::string &name,
+        DType dtype
+    );
+    static DeviceTensor zeroes(
+        const std::vector<size_t> &shape,
+        const std::string &name,
+        DType dtype
+    );
+
     DeviceTensor(const DeviceTensor&) = delete; // no copy assignment for now (double free)
     DeviceTensor& operator=(const DeviceTensor&) = delete;
 
@@ -47,6 +59,16 @@ public:
 
     ~DeviceTensor(); // free the device ptr
 private:
+    // private constructor with no memory allocation - hidden to avoid memory issues
+    DeviceTensor(
+        const std::vector<size_t> &shape,
+        const std::string &name,
+        DType dtype
+    );
+
+    // get Byte size
+    size_t getNumBytes() const;
+
     void* devicePtr_ = nullptr;
     std::vector<size_t> shape_;
 

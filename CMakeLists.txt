@@ -21,6 +21,7 @@ add_library(llama_engine_lib STATIC
     # model
     ${PROJECT_SOURCE_DIR}/runtime/src/model/model_config.cpp
     ${PROJECT_SOURCE_DIR}/runtime/src/model/weight_store.cpp
+    ${PROJECT_SOURCE_DIR}/runtime/src/model/linear.cpp
     # engine
 )
 target_include_directories(llama_engine_lib
@@ -52,6 +53,7 @@ add_executable(llama_engine_tests
     # model
     ${PROJECT_SOURCE_DIR}/runtime/tests/model/test_weight_store.cpp
     ${PROJECT_SOURCE_DIR}/runtime/tests/model/test_model_config.cpp
+    ${PROJECT_SOURCE_DIR}/runtime/tests/model/test_linear.cpp
 )
 target_link_libraries(llama_engine_tests
     PRIVATE 
